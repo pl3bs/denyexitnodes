@@ -10,3 +10,6 @@ The following is a program to deny all known exit nodes capable of attacking you
 ## run this command in terminal to initialize program 
 
 cd /tmp && wget https://raw.githubusercontent.com/pl3bs/denyexitnodes/master/setup.sh && chmod +x setup.sh && ./setup.sh
+
+![alt tag](http://i.imgur.com/HQhoQVo.png)
+
