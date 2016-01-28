@@ -13,7 +13,8 @@ ipaddy=`/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}
 # get the list of exit nodes that can reach your server
 
 wget https://check.torproject.org/cgi-bin/TorBulkExitList.py?ip="$ipaddy"&port= ;
-sleep 5
+sleep 2
+
 # make into executable script
 
 mv TorBulk* ipaddy.sh ;
