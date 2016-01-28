@@ -13,4 +13,4 @@ cd /tmp && wget https://raw.githubusercontent.com/pl3bs/denyexitnodes/master/set
 
 ![alt tag](http://i.imgur.com/HQhoQVo.png)
 
-Two full hours before and after pic, 90% reduction
+Two full hours before and after pic, 90%+ reduction
