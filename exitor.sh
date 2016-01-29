@@ -22,7 +22,8 @@ chmod +x ipaddy.sh ;
 
 # transform file into list of ip addresses
 
-grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' ipaddy.sh ;
+grep -o '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)' ipaddy.sh ;
+
 sed -i -e 1,3d ipaddy.sh ;
 # transform list into iptables drop commands
 
