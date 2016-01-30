@@ -1,6 +1,6 @@
 # remove prior run files
 
-rm TorBulk*  ;
+if test -f "TorBulk*"; then rm TorBulk* ;fi  ;
 
 # go to location of files
 
@@ -13,8 +13,7 @@ ipaddy=`/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}
 # get the list of exit nodes that can reach your server
 
 wget https://check.torproject.org/cgi-bin/TorBulkExitList.py?ip="$ipaddy"&port= ;
-sleep 2 ;
-
+sleep 5
 # make into executable script
 
 mv TorBulk* ipaddy.sh ;
@@ -22,9 +21,8 @@ chmod +x ipaddy.sh ;
 
 # transform file into list of ip addresses
 
-grep -o '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)' ipaddy.sh ;
-
-sed -i -e 1,3d ipaddy.sh ;
+grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' ipaddy.sh
+sed -i -e 1,3d ipaddy.sh
 # transform list into iptables drop commands
 
 sed -i s"|^|iptables -A INPUT -s |" ipaddy.sh ;
@@ -32,9 +30,17 @@ sed -i 's/$/ -j DROP/' ipaddy.sh ;
 
 # execute drop line by line
 
-./ipaddy.sh ;
+until ./ipaddy.sh ;
+do
+        echo ...
+        sleep 1
+done
 
 # remove duplicate rules from iptables
+until iptables-save | uniq | iptables-restore ;
+do
+        echo ...
+        sleep 1
+done
 
-sleep 1 ;
-iptables-save | uniq | iptables-restore ;
+
