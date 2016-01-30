@@ -1,6 +1,8 @@
-# remove prior run files
+# remove prior run files if exists
 
-if test -f "TorBulk*"; then rm TorBulk* ;fi  ;
+if test -f "TorBulk*"; 
+then rm TorBulk* ; 
+fi  ;
 
 # go to location of files
 
@@ -37,10 +39,9 @@ do
 done
 
 # remove duplicate rules from iptables
+
 until iptables-save | uniq | iptables-restore ;
 do
         echo ...
         sleep 1
 done
-
-
