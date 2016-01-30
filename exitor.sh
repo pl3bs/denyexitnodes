@@ -36,4 +36,5 @@ sed -i 's/$/ -j DROP/' ipaddy.sh ;
 
 # remove duplicate rules from iptables
 
+sleep 1 ;
 iptables-save | uniq | iptables-restore ;
